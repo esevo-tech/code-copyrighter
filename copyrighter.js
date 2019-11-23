@@ -7,6 +7,10 @@ const headerContentRegex = /^\s*\*{0,1}[ \t]*(.*)$/gm;
 const headerContent = headerRegex.exec(input)[1];
 let headerContentMatch;
 
+let headerContentLines = [];
 while ((headerContentMatch = headerContentRegex.exec(headerContent)) != null) {
-  console.log(headerContentMatch[1]);
+  headerContentLines.push(headerContentMatch[1]);
 }
+
+const headerContentText = headerContentLines.join("\n");
+console.log(headerContentText);
