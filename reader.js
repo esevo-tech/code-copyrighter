@@ -1,9 +1,11 @@
-const headerRegex = /^\/\*\s*(.*?)\s*\*\//sg;
-const headerContentRegex = /^[ \t]*\*{0,1}[ \t]*(.*)$/gm;
+function getFileHeaderContent(input, format) {
+  const headerRegex = format.reader.headerRegex;
+  return headerRegex.exec(input)[1];
+}
 
-function getFileHeader(input) {
-  const headerContent = headerRegex.exec(input)[1];
-  let headerContentMatch;
+function getFileHeader(input, format) {
+  const headerContentRegex = format.reader.headerContentRegex;
+  const headerContent = getFileHeaderContent(input, format);
 
   let headerContentLines = [];
   while ((headerContentMatch = headerContentRegex.exec(headerContent)) != null) {
