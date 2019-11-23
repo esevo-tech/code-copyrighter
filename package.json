@@ -1,0 +1,14 @@
+{
+  "name": "code-copyrighter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/copyrighter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "glob": "^7.1.6"
+  }
+}
