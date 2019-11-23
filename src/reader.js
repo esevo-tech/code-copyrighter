@@ -6,7 +6,7 @@ function getFileHeaderContent(input, format) {
 
   if (match == null)
     return null;
-  return match[1];
+  return match[1].replace(/\r\n/g, "\n");
 }
 
 function getFileHeader(input, format) {
