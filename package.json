@@ -9,6 +9,7 @@
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
+    "crc": "^3.8.0",
     "glob": "^7.1.6"
   }
 }
