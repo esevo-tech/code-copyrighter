@@ -14,7 +14,17 @@ function scan(path) {
     
     if (header != null) {
       const headerHash = crc.crc24(header);
-      headers[headerHash] = header;
+      let headerEntry = headers[headerHash];
+
+      if (headerEntry === undefined) {
+        headerEntry = {
+          content: header,
+          files: []
+        };
+        headers[headerHash] = headerEntry;
+      }
+
+      headerEntry.files.push(path);
     }
   }
 
