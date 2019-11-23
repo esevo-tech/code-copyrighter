@@ -1,23 +1,30 @@
 const glob = require("glob");
 const fs = require("fs");
+const crc = require("crc");
 
 const getFileHeader = require("./reader");
 const format = require("./formats/c-like.js");
 
 function scan(path) {
-  headers = [];
+  headers = {};
 
   function processSingleFile(path) {
     const fileContent = fs.readFileSync(path).toString("utf8");
     const header = getFileHeader(fileContent, format);
-    headers.push(header);
+    
+    if (header != null) {
+      const headerHash = crc.crc24(header);
+      headers[headerHash] = header;
+    }
   }
 
   glob(path, (err, files) => {
     for (file of files) {
       processSingleFile(file);
-      console.log(headers);
     }
+
+    const output = JSON.stringify(headers, null, 4);
+    fs.writeFileSync("output.json", output);
   });
 }
 
