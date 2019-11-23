@@ -1,6 +1,9 @@
+const headerMatchAllComments = /^\/\*\s*(.*?)\s*\*\//sg;
+const headerMatchIgnoreJavadoc = /^\/\*{1}\s+(.*?)\s*\*\//sg;
+
 module.exports = {
   reader: {
-    headerRegex: /^\/\*\s*(.*?)\s*\*\//sg,
+    headerRegex: headerMatchIgnoreJavadoc,
     headerContentRegex: /^[ \t]*\*{0,1}[ \t]*(.*)$/gm
   }
 };
