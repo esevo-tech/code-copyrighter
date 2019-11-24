@@ -40,7 +40,10 @@ function scan(basePath, globPath, format, projectDir) {
       entry = outputData.noHeader;
     }
 
-    entry.push(filePath);
+    entry.push({
+      path: filePath,
+      variables: interpretedHeader.variables
+    });
   }
 
   globPath = path.join(basePath, globPath);
