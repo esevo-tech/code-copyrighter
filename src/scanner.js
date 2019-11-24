@@ -6,7 +6,10 @@ const getFileHeader = require("./reader");
 const format = require("./formats/c-like.js");
 
 function scan(path) {
-  headers = {};
+  outputData = {
+    headers: {},
+    noHeader: []
+  };
 
   function processSingleFile(path) {
     const fileContent = fs.readFileSync(path).toString("utf8");
@@ -14,18 +17,22 @@ function scan(path) {
     
     if (header != null) {
       const headerHash = crc.crc24(header);
-      let headerEntry = headers[headerHash];
+      let headerEntry = outputData.headers[headerHash];
 
       if (headerEntry === undefined) {
         headerEntry = {
           content: header,
           files: []
         };
-        headers[headerHash] = headerEntry;
+        outputData.headers[headerHash] = headerEntry;
       }
 
-      headerEntry.files.push(path);
+      entry = headerEntry.files;
+    } else {
+      entry = outputData.noHeader;
     }
+
+    entry.push(path);
   }
 
   glob(path, (err, files) => {
@@ -33,7 +40,7 @@ function scan(path) {
       processSingleFile(file);
     }
 
-    const output = JSON.stringify(headers, null, 4);
+    const output = JSON.stringify(outputData, null, 4);
     fs.writeFileSync("output.json", output);
   });
 }
