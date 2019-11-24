@@ -5,7 +5,7 @@ function buildHeader(content, format) {
   const headerTransform = format.writer.headerTransform;
   const header = applyTransform(headerContent, headerTransform);
 
-  console.log(header);
+  return header + '\n';
 }
 
 function applyTransform(text, transform) {
@@ -13,5 +13,4 @@ function applyTransform(text, transform) {
   return output;
 }
 
-const format = require("../formats")()["c-like-ignore-javadoc"];
-buildHeader(`Hello\nworld\nworld`, format);
+module.exports = buildHeader;
