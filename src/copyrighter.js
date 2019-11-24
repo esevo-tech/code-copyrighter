@@ -17,7 +17,7 @@ function start(argv) {
 }
 
 function scan(projectDir) {
-  const projectConfigPath = path.join(projectDir, "project.json");
+  const projectConfigPath = path.join(projectDir, "copyrighter.json");
   const projectConfig = JSON.parse(fs.readFileSync(projectConfigPath).toString("utf8"));
   const basePath = projectConfig.baseDir;
 
