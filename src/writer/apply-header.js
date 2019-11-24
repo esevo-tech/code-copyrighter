@@ -10,9 +10,16 @@ function applyHeader(file, headerContent, format) {
 
   if (actualHeader == null) {
     fileContent = newHeader + fileContent;
+  } else {
+    fileContent = removeExistingHeader(fileContent, format);
+    console.log(fileContent);
   }
 
   fs.writeFileSync(file, fileContent);
+}
+
+function removeExistingHeader(fileContent, format) {
+  return fileContent.replace(format.headerRegex, "");
 }
 
 const format = require("../formats")()["c-like-ignore-javadoc"];
