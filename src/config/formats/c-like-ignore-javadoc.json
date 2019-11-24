@@ -4,7 +4,11 @@
   "writer": {
     "headerContentTransform": {
       "search": "/.*/",
-      "replace": "* $&"
+      "replace": " * $&"
+    },
+    "headerTransform": {
+      "search": "/.*/",
+      "replace": "/*\n$&\n */"
     }
   }
 }

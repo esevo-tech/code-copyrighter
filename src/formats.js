@@ -15,6 +15,7 @@ function buildFormats() {
 
     if (format.writer !== undefined) {
       parseTransform(format.writer.headerContentTransform);
+      parseTransform(format.writer.headerTransform);
     }
 
     formats[formatName] = format;
