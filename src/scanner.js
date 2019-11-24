@@ -54,6 +54,7 @@ function scan(basePath, globPath, format, projectDir) {
       processSingleFile(basePath, relPath);
     }
 
+    projectDir = path.join(projectDir, "copyrighter");
     writeHeadersToFilesystem(outputData.headers, path.join(projectDir, "headers"));
 
     if (cleanUnusedHeaders) {
