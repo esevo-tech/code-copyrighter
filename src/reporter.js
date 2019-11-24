@@ -10,8 +10,10 @@ function map2array(map) {
 
   for (const key in map) {
     const value = map[key];
-    value._key = key;
-    result.push(value);
+    result.push({
+      key,
+      value
+    });
   }
 
   return result;
@@ -27,7 +29,12 @@ function generateReport(data) {
   };
 
   let filesCount = 0;
-  for (const header of view.headers) {
+  for (const headerWrapper of view.headers) {
+    const header = headerWrapper.value;
+    for (const file of header.files) {
+      file.variables = map2array(file.variables);
+    }
+
     header.filesCount = header.files.length;
     filesCount += header.filesCount;
   }

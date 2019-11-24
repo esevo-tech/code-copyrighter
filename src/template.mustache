@@ -31,6 +31,7 @@
     <h1>Report of {{headersCount}} copyright headers in {{filesCount}} file(s)</h1>
 
     {{#headers}}
+      {{#value}}
       <section>
         <h2>Header <span class="highlighted">{{name}}</span>: {{filesCount}} file(s)</h2>
         <pre>{{content}}</pre>
@@ -39,11 +40,17 @@
           <summary>List of files</summary>
           <ul>
             {{#files}}
-              <li><code>{{path}}</code></li>
+              <li>
+                <code>{{path}}</code>
+                {{#variables}}
+                  {{key}}={{value}}
+                {{/variables}}
+              </li>
             {{/files}}
           </ul>
         </details>
       </section>
+      {{/value}}
     {{/headers}}
 
     <section>
