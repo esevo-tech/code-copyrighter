@@ -12,7 +12,7 @@ function applyHeader(file, headerContent, format) {
     fileContent = newHeader + fileContent;
   }
 
-  console.log(fileContent);
+  fs.writeFileSync(file, fileContent);
 }
 
 const format = require("../formats")()["c-like-ignore-javadoc"];
