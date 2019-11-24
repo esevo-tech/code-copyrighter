@@ -1,4 +1,4 @@
 {
-  "headerRegex": "/^\/\\*\\s*(.*?)\\s*\\*\//gs",
+  "headerRegex": "/^\\/\\*{1}\\s+(.*?)\\s*\\*\//gs",
   "headerContentRegex": "/^[ \\t]*\\*{0,1}[ \\t]*(.*)$/gm"
 }
