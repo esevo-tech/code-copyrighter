@@ -18,8 +18,10 @@ function map2array(map) {
 }
 
 function generateReport(data) {
+  const headers = map2array(data.headers);
   const view = {
-    headers: map2array(data.headers),
+    headers,
+    headersCount: headers.length,
     noHeader: data.noHeader,
     noHeaderCount: data.noHeader.length
   };
