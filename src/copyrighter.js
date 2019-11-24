@@ -19,7 +19,7 @@ function start(argv) {
 function scan(projectDir) {
   const projectConfigPath = path.join(projectDir, "copyrighter.json");
   const projectConfig = JSON.parse(fs.readFileSync(projectConfigPath).toString("utf8"));
-  const basePath = projectConfig.baseDir;
+  const basePath = path.resolve(projectConfig.baseDir, projectDir);
 
   for (glob in projectConfig.paths) {
     const formatName = projectConfig.paths[glob];
