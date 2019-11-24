@@ -19,6 +19,10 @@
         border: 1px dashed silver;
         padding: 10px;
       }
+
+      .highlighted {
+        color: #6200ee;
+      }
     </style>
   </head>
   <body>
@@ -26,7 +30,7 @@
 
     {{#headers}}
       <section>
-        <h2>{{filesCount}} file(s) with the header CRC {{_key}}</h2>
+        <h2>Header <span class="highlighted">{{name}}</span>: {{filesCount}} file(s)</h2>
         <pre>{{content}}</pre>
 
         <details>
