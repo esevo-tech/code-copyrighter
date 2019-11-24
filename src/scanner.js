@@ -5,7 +5,8 @@ const crc = require("crc");
 const getFileHeader = require("./reader");
 const reporter = require("./reporter");
 
-const format = require("./formats/c-like.js");
+const formats = require("./formats");
+const format = formats()["c-like-ignore-javadoc"];
 
 function scan(path) {
   outputData = {

@@ -1,5 +1,5 @@
 function getFileHeaderContent(input, format) {
-  const headerRegex = format.reader.headerRegex;
+  const headerRegex = format.headerRegex;
   headerRegex.lastIndex = 0;
   
   const match = headerRegex.exec(input);
@@ -15,7 +15,7 @@ function getFileHeader(input, format) {
   if (headerContent === null)
     return null;
   
-  const headerContentRegex = format.reader.headerContentRegex;
+  const headerContentRegex = format.headerContentRegex;
   headerContentRegex.lastIndex = 0;
 
   let headerContentLines = [];
