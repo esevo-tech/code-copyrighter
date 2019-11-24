@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+
+      section {
+        padding: 2em;
+      }
+
+      h1, h2 {
+        font-weight: 100;
+        margin: 0;
+      }
+
+      pre {
+        border: 1px dashed silver;
+        padding: 10px;
+      }
+    </style>
+  </head>
   <body>
     <h1>Report of file copyright headers</h1>
 
     {{#headers}}
       <section>
-      <h1>Hash: {{_key}}</h1>
+      <h2>Hash: {{_key}}</h2>
 <pre>{{content}}</pre>
       </section>
     {{/headers}}
