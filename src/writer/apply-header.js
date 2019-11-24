@@ -21,7 +21,7 @@ function applyHeader(file, headerContent, format) {
 function removeExistingHeader(fileContent, format) {
   return fileContent
     .replace(format.headerRegex, "")
-    .replace(/^[\s\n]*/, "");
+    .replace(/^ *\n/g, "");
 }
 
 const format = require("../formats")()["c-like-ignore-javadoc"];
