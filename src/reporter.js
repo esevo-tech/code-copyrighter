@@ -20,7 +20,8 @@ function map2array(map) {
 function generateReport(data) {
   const view = {
     headers: map2array(data.headers),
-    noHeader: data.noHeader
+    noHeader: data.noHeader,
+    noHeaderCount: data.noHeader.length
   };
 
   for (const header of view.headers) {
