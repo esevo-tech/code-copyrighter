@@ -30,9 +30,13 @@
         color: #6200ee;
       }
 
+      .dir {
+        opacity: 0.4;
+      }
+
       .variables {
         font-size: 0.75em;
-        opacity: 0.5;
+        opacity: 0.7;
       }
     </style>
   </head>
@@ -50,7 +54,7 @@
           <ul>
             {{#files}}
               <li>
-                <code>{{path}}</code>
+                <code class="dir">{{dir}}</code><code class="filename">{{name}}</code>
                 <div class="variables">
                 {{#variables}}
                   {{key}}={{value}}
@@ -71,7 +75,9 @@
         <summary>List of files</summary>
         <ul>
           {{#noHeader}}
-            <li><code>{{path}}</code></li>
+            <li>
+              <code class="dir">{{dir}}</code><code class="filename">{{name}}</code>
+            </li>
           {{/noHeader}}
         </ul>
       </details>
