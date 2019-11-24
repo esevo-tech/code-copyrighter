@@ -41,12 +41,30 @@ function scan(globPath, format, projectDir) {
       processSingleFile(file);
     }
 
+    writeHeadersToFilesystem(outputData.headers, path.join(projectDir, "headers"));
+
     const output = JSON.stringify(outputData, null, 4);
     fs.writeFileSync(path.join(projectDir, "output.json"), output);
 
     const outputHtml = reporter(outputData);
     fs.writeFileSync(path.join(projectDir, "output.html"), outputHtml);
   });
+}
+
+function writeHeadersToFilesystem(headers, outputDir) {
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+  } else {
+    const stats = fs.lstatSync(outputDir);
+    if (!stats.isDirectory()) {
+      console.warn("Unable to create headers directory.");  
+    }
+  }
+
+  for (const headerKey in headers) {
+    const header = headers[headerKey];
+    fs.writeFileSync(path.join(outputDir, headerKey + ".txt"), header.content);
+  }
 }
 
 module.exports = scan;
