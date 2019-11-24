@@ -1,4 +1,10 @@
 {
   "headerRegex": "/^\\/\\*{1}\\s+(.*?)\\s*\\*\//gs",
-  "headerContentRegex": "/^[ \\t]*\\*{0,1}[ \\t]*(.*)$/gm"
+  "headerContentRegex": "/^[ \\t]*\\*{0,1}[ \\t]*(.*)$/gm",
+  "writer": {
+    "headerContentTransform": {
+      "search": "/.*/",
+      "replace": "* $&"
+    }
+  }
 }

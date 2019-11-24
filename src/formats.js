@@ -13,10 +13,18 @@ function buildFormats() {
     format.headerRegex = parseRegex(format.headerRegex);
     format.headerContentRegex = parseRegex(format.headerContentRegex);
 
+    if (format.writer !== undefined) {
+      parseTransform(format.writer.headerContentTransform);
+    }
+
     formats[formatName] = format;
   }
 
   return formats;
+}
+
+function parseTransform(transform) {
+  transform.search = parseRegex(transform.search);
 }
 
 function parseRegex(regexString) {
