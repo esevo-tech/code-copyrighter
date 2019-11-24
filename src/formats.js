@@ -10,8 +10,8 @@ function buildFormats() {
   for (const formatFile of files) {
     const format = JSON.parse(fs.readFileSync(formatFile).toString("utf8"));
     const formatName = path.parse(formatFile).name;
-    format.headerRegex = new RegExp(format.headerRegex).compile();
-    format.headerContentRegex = new RegExp(format.headerContentRegex).compile();
+    format.headerRegex = parseRegex(format.headerRegex);
+    format.headerContentRegex = parseRegex(format.headerContentRegex);
 
     formats[formatName] = format;
   }
@@ -19,6 +19,9 @@ function buildFormats() {
   return formats;
 }
 
-console.log(buildFormats());
+function parseRegex(regexString) {
+  const match = /^\/(.*)\/([\w]*)/.exec(regexString);
+  return new RegExp(match[1], match[2]);
+}
 
-module.exports = buildFormats();
+module.exports = buildFormats;
