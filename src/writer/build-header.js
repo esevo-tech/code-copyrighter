@@ -1,5 +1,3 @@
-const utils = require("../utils");
-
 function buildHeader(content, format) {
   const headerContentTransform = format.writer.headerContentTransform;
   const headerContent = applyTransform(content, headerContentTransform);
