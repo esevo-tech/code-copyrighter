@@ -13,8 +13,9 @@ function scan(basePath, globPath, format, projectDir) {
     noHeader: []
   };
 
-  function processSingleFile(path) {
-    const fileContent = fs.readFileSync(path).toString("utf8");
+  function processSingleFile(basePath, filePath) {
+    const fullPath = path.join(basePath, filePath);
+    const fileContent = fs.readFileSync(fullPath).toString("utf8");
     const header = getFileHeader(fileContent, format);
     
     if (header != null) {
@@ -35,13 +36,15 @@ function scan(basePath, globPath, format, projectDir) {
       entry = outputData.noHeader;
     }
 
-    entry.push(path);
+    entry.push(filePath);
   }
 
   globPath = path.join(basePath, globPath);
   glob(globPath, (err, files) => {
     for (file of files) {
-      processSingleFile(file);
+      const fullPath = path.resolve(file);
+      const relPath = path.relative(basePath, fullPath);
+      processSingleFile(basePath, relPath);
     }
 
     writeHeadersToFilesystem(outputData.headers, path.join(projectDir, "headers"));
