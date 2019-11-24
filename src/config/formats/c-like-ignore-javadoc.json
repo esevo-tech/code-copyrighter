@@ -3,11 +3,11 @@
   "headerContentRegex": "/^[ \\t]*\\*{0,1}[ \\t]*(.*)$/gm",
   "writer": {
     "headerContentTransform": {
-      "search": "/.*/",
+      "search": "/^.*$/gm",
       "replace": " * $&"
     },
     "headerTransform": {
-      "search": "/.*/",
+      "search": "/^.*$/gs",
       "replace": "/*\n$&\n */"
     }
   }

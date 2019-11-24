@@ -16,4 +16,4 @@ function applyTransform(text, transform) {
 }
 
 const format = require("../formats")()["c-like-ignore-javadoc"];
-buildHeader("Hello world", format);
+buildHeader(`Hello\nworld\nworld`, format);
