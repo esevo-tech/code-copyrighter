@@ -5,10 +5,11 @@ const path = require("path");
 
 const getFileHeader = require("./reader");
 const reporter = require("./reporter");
+const knownHeaders = require("./known-headers");
 
 function scan(globPath, format, projectDir) {
   outputData = {
-    headers: {},
+    headers: knownHeaders(projectDir),
     noHeader: []
   };
 
@@ -22,6 +23,7 @@ function scan(globPath, format, projectDir) {
 
       if (headerEntry === undefined) {
         headerEntry = {
+          name: headerHash,
           content: header,
           files: []
         };
@@ -63,7 +65,7 @@ function writeHeadersToFilesystem(headers, outputDir) {
 
   for (const headerKey in headers) {
     const header = headers[headerKey];
-    fs.writeFileSync(path.join(outputDir, headerKey + ".txt"), header.content);
+    fs.writeFileSync(path.join(outputDir, header.name + ".txt"), header.content);
   }
 }
 
