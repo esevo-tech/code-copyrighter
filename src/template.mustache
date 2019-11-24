@@ -26,11 +26,11 @@
 
     {{#headers}}
       <section>
-        <h2>Header with CRC {{_key}}</h2>
+        <h2>{{filesCount}} file(s) with the header CRC {{_key}}</h2>
         <pre>{{content}}</pre>
 
         <details>
-          <summary>Files</summary>
+          <summary>List of files</summary>
           <ul>
             {{#files}}
               <li><code>{{.}}</code></li>
@@ -41,10 +41,10 @@
     {{/headers}}
 
     <section>
-      <h2>No header detected</h2>
+      <h2>Files with no header detected</h2>
 
       <details>
-        <summary>Files</summary>
+        <summary>List of files</summary>
         <ul>
           {{#noHeader}}
             <li><code>{{.}}</code></li>
