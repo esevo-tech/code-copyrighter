@@ -5,10 +5,7 @@ const crc = require("crc");
 const getFileHeader = require("./reader");
 const reporter = require("./reporter");
 
-const formats = require("./formats");
-const format = formats()["c-like-ignore-javadoc"];
-
-function scan(path) {
+function scan(path, format) {
   outputData = {
     headers: {},
     noHeader: []
