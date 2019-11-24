@@ -1,11 +1,12 @@
 const glob = require("glob");
 const fs = require("fs");
 const crc = require("crc");
+const path = require("path");
 
 const getFileHeader = require("./reader");
 const reporter = require("./reporter");
 
-function scan(path, format) {
+function scan(globPath, format, projectDir) {
   outputData = {
     headers: {},
     noHeader: []
@@ -35,16 +36,16 @@ function scan(path, format) {
     entry.push(path);
   }
 
-  glob(path, (err, files) => {
+  glob(globPath, (err, files) => {
     for (file of files) {
       processSingleFile(file);
     }
 
     const output = JSON.stringify(outputData, null, 4);
-    fs.writeFileSync("output.json", output);
+    fs.writeFileSync(path.join(projectDir, "output.json"), output);
 
     const outputHtml = reporter(outputData);
-    fs.writeFileSync("output.html", outputHtml);
+    fs.writeFileSync(path.join(projectDir, "output.html"), outputHtml);
   });
 }
 
