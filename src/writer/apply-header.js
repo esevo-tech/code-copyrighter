@@ -1,26 +1,25 @@
 const fs = require("fs");
-
-const reader = require("../reader");
 const buildHeader = require("./build-header");
 
 function applyHeader(file, headerContent, format) {
   let fileContent = fs.readFileSync(file).toString("utf8");
-  const actualHeader = reader(fileContent, format);
   const newHeader = buildHeader(headerContent, format);
 
-  if (actualHeader !== null) {
-    fileContent = removeExistingHeader(fileContent, format); 
-  }
-
+  fileContent = removeExistingHeader(fileContent, format);
   fileContent = newHeader + fileContent;
 
   fs.writeFileSync(file, fileContent);
 }
 
 function removeExistingHeader(fileContent, format) {
-  return fileContent
-    .replace(format.headerRegex, "")
-    .replace(/^ *\n/g, "");
+  let contentWithoutHeader = fileContent.replace(format.headerRegex, "");
+
+  // Remove an extra blank line if the content was removed.
+  if (contentWithoutHeader != fileContent) {
+    contentWithoutHeader = contentWithoutHeader.replace(/^ *\n/g, "");
+  }
+
+  return contentWithoutHeader;
 }
 
 const format = require("../formats")()["c-like-ignore-javadoc"];
