@@ -7,7 +7,7 @@ const getFileHeader = require("./reader");
 const reporter = require("./reporter");
 const knownHeaders = require("./known-headers");
 
-function scan(globPath, format, projectDir) {
+function scan(basePath, globPath, format, projectDir) {
   outputData = {
     headers: knownHeaders(projectDir),
     noHeader: []
@@ -38,6 +38,7 @@ function scan(globPath, format, projectDir) {
     entry.push(path);
   }
 
+  globPath = path.join(basePath, globPath);
   glob(globPath, (err, files) => {
     for (file of files) {
       processSingleFile(file);
