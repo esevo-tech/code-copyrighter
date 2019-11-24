@@ -26,9 +26,12 @@ function generateReport(data) {
     noHeaderCount: data.noHeader.length
   };
 
+  let filesCount = 0;
   for (const header of view.headers) {
     header.filesCount = header.files.length;
+    filesCount += header.filesCount;
   }
+  view.filesCount = filesCount;
   
   return mustache.render(template, view);
 }
