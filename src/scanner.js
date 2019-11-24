@@ -5,6 +5,7 @@ const path = require("path");
 
 const getFileHeader = require("./reader");
 const reporter = require("./reporter");
+const interpreter = require("./interpreter");
 const knownHeaders = require("./known-headers");
 
 const cleanUnusedHeaders = true;
@@ -19,15 +20,16 @@ function scan(basePath, globPath, format, projectDir) {
     const fullPath = path.join(basePath, filePath);
     const fileContent = fs.readFileSync(fullPath).toString("utf8");
     const header = getFileHeader(fileContent, format);
+    const interpretedHeader = interpreter(header);
     
     if (header != null) {
-      const headerHash = crc.crc24(header);
+      const headerHash = crc.crc24(interpretedHeader.content);
       let headerEntry = outputData.headers[headerHash];
 
       if (headerEntry === undefined) {
         headerEntry = {
           name: headerHash,
-          content: header,
+          content: interpretedHeader.content,
           files: []
         };
         outputData.headers[headerHash] = headerEntry;

@@ -17,4 +17,4 @@ function parse(content) {
   };
 }
 
-console.log(parse("Copyright 1999"));
+module.exports = parse;
