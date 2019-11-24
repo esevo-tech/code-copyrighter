@@ -8,12 +8,11 @@ function applyHeader(file, headerContent, format) {
   const actualHeader = reader(fileContent, format);
   const newHeader = buildHeader(headerContent, format);
 
-  if (actualHeader == null) {
-    fileContent = newHeader + fileContent;
-  } else {
-    fileContent = removeExistingHeader(fileContent, format);
-    console.log(fileContent);
+  if (actualHeader !== null) {
+    fileContent = removeExistingHeader(fileContent, format); 
   }
+
+  fileContent = newHeader + fileContent;
 
   fs.writeFileSync(file, fileContent);
 }
