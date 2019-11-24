@@ -8,8 +8,8 @@ const projectConfigPath = path.join(projectDir, "project.json");
 const projectConfig = JSON.parse(fs.readFileSync(projectConfigPath).toString("utf8"));
 const formats = require("./formats")();
 
-for (glob in projectConfig) {
-  const formatName = projectConfig[glob];
+for (glob in projectConfig.paths) {
+  const formatName = projectConfig.paths[glob];
   console.log(`Scanning ${glob} with ${formatName}...`);
   scanner(glob, formats[formatName], projectDir);
 }
