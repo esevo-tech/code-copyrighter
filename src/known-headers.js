@@ -22,4 +22,24 @@ function build(projectDir) {
   return headers;
 }
 
-module.exports = build;
+function clean(headers, projectDir) {
+  for (headerKey in headers) {
+    const header = headers[headerKey];
+
+    if (header.files.length !== 0) {
+      continue;
+    }
+
+    const file = header.name;
+    const filePath = path.join(projectDir, "headers", file + ".txt");
+
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+  }
+}
+
+module.exports = {
+  build,
+  clean
+};

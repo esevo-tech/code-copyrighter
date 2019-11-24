@@ -7,9 +7,11 @@ const getFileHeader = require("./reader");
 const reporter = require("./reporter");
 const knownHeaders = require("./known-headers");
 
+const cleanUnusedHeaders = true;
+
 function scan(basePath, globPath, format, projectDir) {
   outputData = {
-    headers: knownHeaders(projectDir),
+    headers: knownHeaders.build(projectDir),
     noHeader: []
   };
 
@@ -48,6 +50,10 @@ function scan(basePath, globPath, format, projectDir) {
     }
 
     writeHeadersToFilesystem(outputData.headers, path.join(projectDir, "headers"));
+
+    if (cleanUnusedHeaders) {
+      knownHeaders.clean(outputData.headers, projectDir);
+    }
 
     const output = JSON.stringify(outputData, null, 4);
     fs.writeFileSync(path.join(projectDir, "output.json"), output);
