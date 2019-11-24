@@ -39,5 +39,18 @@
         </details>
       </section>
     {{/headers}}
+
+    <section>
+      <h2>No header detected</h2>
+
+      <details>
+        <summary>Files</summary>
+        <ul>
+          {{#noHeader}}
+            <li><code>{{.}}</code></li>
+          {{/noHeader}}
+        </ul>
+      </details>
+    </section>
   </body>
 </html>

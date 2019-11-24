@@ -19,8 +19,10 @@ function map2array(map) {
 
 function generateReport(data) {
   const view = {
-    headers: map2array(data.headers)
-  }
+    headers: map2array(data.headers),
+    noHeader: data.noHeader
+  };
+  
   return mustache.render(template, view);
 }
 
