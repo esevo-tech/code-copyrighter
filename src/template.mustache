@@ -25,6 +25,11 @@
       .highlighted {
         color: #6200ee;
       }
+
+      .variables {
+        font-size: 0.75em;
+        opacity: 0.5;
+      }
     </style>
   </head>
   <body>
@@ -42,9 +47,11 @@
             {{#files}}
               <li>
                 <code>{{path}}</code>
+                <div class="variables">
                 {{#variables}}
                   {{key}}={{value}}
                 {{/variables}}
+                </div>
               </li>
             {{/files}}
           </ul>
