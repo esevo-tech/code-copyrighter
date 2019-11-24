@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 
 function build(projectDir) {
-  const files = glob.sync(path.join(projectDir, "headers", "*.txt"));
+  const files = glob.sync(path.join(projectDir, "copyrighter", "headers", "*.txt"));
   const headers = {};
 
   for (file of files) {
@@ -31,7 +31,7 @@ function clean(headers, projectDir) {
     }
 
     const file = header.name;
-    const filePath = path.join(projectDir, "headers", file + ".txt");
+    const filePath = path.join(projectDir, "copyrighter", "headers", file + ".txt");
 
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);
