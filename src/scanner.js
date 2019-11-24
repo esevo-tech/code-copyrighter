@@ -3,6 +3,8 @@ const fs = require("fs");
 const crc = require("crc");
 
 const getFileHeader = require("./reader");
+const reporter = require("./reporter");
+
 const format = require("./formats/c-like.js");
 
 function scan(path) {
@@ -42,6 +44,9 @@ function scan(path) {
 
     const output = JSON.stringify(outputData, null, 4);
     fs.writeFileSync("output.json", output);
+
+    const outputHtml = reporter(outputData);
+    fs.writeFileSync("output.html", outputHtml);
   });
 }
 
