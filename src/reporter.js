@@ -3,7 +3,9 @@ const templateFile = "./template.mustache";
 const fs = require("fs");
 const path = require("path");
 const mustache = require("mustache");
-const template = fs.readFileSync(templateFile).toString("utf8");
+
+const templatePath = path.join(path.dirname(fs.realpathSync(__filename)), templateFile);
+const template = fs.readFileSync(templatePath).toString("utf8");
 mustache.parse(template);
 
 function map2array(map) {
