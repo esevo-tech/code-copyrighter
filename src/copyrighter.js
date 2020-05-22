@@ -24,7 +24,15 @@ function scan(projectDir) {
   for (glob in projectConfig.paths) {
     const formatName = projectConfig.paths[glob];
     console.log(`Scanning ${glob} with ${formatName}...`);
-    scanner(basePath, glob, formats[formatName], projectDir);
+
+    const format = formats[formatName];
+
+    if (format != null) {
+      scanner(basePath, glob, formats[formatName], projectDir);
+    } else {
+      console.error(`Failed to find format with name ${formatName}.`);
+      return;
+    }
   }
 
   console.log("Scan complete.");
