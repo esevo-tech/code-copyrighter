@@ -1,8 +1,9 @@
-const formatsGlob = "./config/formats/**.json";
-
 const fs = require("fs");
 const glob = require("glob");
 const path = require("path");
+
+const formatsRelGlob = "./config/formats/**.json";
+const formatsGlob = path.join(path.dirname(fs.realpathSync(__filename)), formatsRelGlob);
 
 const utils = require("./utils");
 
